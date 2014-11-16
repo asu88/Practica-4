@@ -1,3 +1,55 @@
+
+describe("09 - Clase PlayerMissile", function() {
+
+
+    it("defined missile in spriteSheet", function() {
+        // SpriteSheet.map['missile'] = sprites.missile;
+        // expect(SpriteSheet.map['missile']).toBeDefined();
+    });
+
+    it("add 2 missile to spriteSheet", function() {
+        SpriteSheet.map = sprites
+
+        board = new GameBoard();
+        pShip = new PlayerShip();
+        pShip.reload = -1;
+        board.add(pShip);
+
+        board.step(20);
+        Game.keys['fire'] = true;
+        board.step(20);
+        Game.keys['fire'] = false;
+        board.step(20);
+
+        Game.keys['fire'] = true;
+        board.step(20);
+        expect(board.objects.length).toBe(3);
+        //1 ship + 2 missile
+    });
+
+
+    it("draw missile", function() {
+        SpriteSheet.map = sprites
+        //SpriteSheet.map['missile'] = sprites.missile;
+        board = new GameBoard();
+        //pShip = new PlayerShip();
+        ctx = {};
+        var m1 = new PlayerMissile();
+        var m2 = new PlayerMissile();
+
+        spyOn(m1, 'draw');
+        spyOn(m2, 'draw');
+        board.add(m1);
+        board.add(m2);
+        board.draw(ctx)
+        expect(m1.draw).toHaveBeenCalled();
+        expect(m2.draw).toHaveBeenCalled();
+    });
+
+});
+
+
+
 /*
 
   Requisitos: 
