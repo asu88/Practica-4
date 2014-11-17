@@ -1,10 +1,10 @@
 
-describe("09 - Clase PlayerMissile", function() {
+describe("08 - Clase PlayerMissile", function() {
 
 
     it("defined missile in spriteSheet", function() {
-        // SpriteSheet.map['missile'] = sprites.missile;
-        // expect(SpriteSheet.map['missile']).toBeDefined();
+         SpriteSheet.map['missile'] = sprites.missile;
+         expect(SpriteSheet.map['missile']).toBeDefined();
     });
 
     it("add 2 missile to spriteSheet", function() {

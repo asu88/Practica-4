@@ -1,5 +1,84 @@
-/*
 
+describe("GameBoardSpec", function() {
+  var a;
+  var canvas; 
+  var TablaNaves;
+  var NaveUsuario;    
+  
+  beforeEach(function(){
+  loadFixtures('index.html');
+  
+  canvas = $('#game')[0];
+  expect(canvas).toExist();
+  
+  ctx = canvas.getContext('2d');
+  expect(ctx).toBeDefined();
+  oldGame = Game;
+  SpriteSheet.load (sprites,function(){});
+  TablaNaves = new GameBoard();
+  NaveUsuario = new PlayerShip();    
+  
+
+  });
+
+   afterEach(function(){
+        Game = oldGame; // Reseteamos Game tras ser usado
+    });
+  
+  
+
+ it("GameBoards.add()  ",function(){
+    
+   // spyOn(GameBoard., "draw");
+    //spyOn(GameBoard, "add");
+    
+   
+    TablaNaves.add(NaveUsuario);
+    expect(TablaNaves.objects.length).toEqual(1);
+    Game.setBoard(3,TablaNaves); 
+    expect(TablaNaves.add(NaveUsuario)).toEqual(NaveUsuario);
+    
+    
+  });
+
+   it("GameBoard.objects[0]  ",function(){
+        
+   
+    TablaNaves.add(NaveUsuario);
+    expect(TablaNaves.objects.length).toEqual(1);
+    Game.setBoard(3,TablaNaves); 
+    expect(TablaNaves.objects[0]).toEqual(NaveUsuario);
+
+    
+  });
+
+   it("GameBoards.remove(NaveUsuario), GameBoards.finalizeRemoved()",function(){
+    //var rem; 
+
+    TablaNaves.add(NaveUsuario);
+    expect(TablaNaves.objects.length).toEqual(1);
+    TablaNaves.resetRemoved();
+    TablaNaves.remove(NaveUsuario);
+    TablaNaves.finalizeRemoved();
+    expect(TablaNaves.objects.length).toEqual(0);
+   // TablaNaves.resetRemoved();
+
+ });
+
+   it("GameBoard.iterate",function(){
+        TablaNaves.add(NaveUsuario);
+        TablaNaves.add(NaveUsuario);
+        TablaNaves.add(NaveUsuario);
+        expect(TablaNaves.objects.length).toEqual(3);
+      //expect(GameBoard.add).toHaveBeenCalled();
+       // expect(SpriteSheet.draw.calls[0].args[1]).toEqual(NaveUsuario);
+   });
+
+});
+
+
+  
+/*
   En el anterior prototipo (06-player), el objeto Game permite
   gestionar una colección de tableros (boards). Los tres campos de
   estrellas, la pantalla de inicio, y el sprite de la nave del

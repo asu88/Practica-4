@@ -1,35 +1,26 @@
 
 
-describe("09 - Enemies", function() {
+describe("09 - Clase Enemy", function() {
 
-    var canvas, ctx;
+    
+    
 
-    beforeEach(function() { 
-        loadFixtures('index.html');
 
-        canvas = $('#game')[0];
-        expect(canvas).toExist();
-
-        ctx = canvas.getContext('2d');
-        expect(ctx).toBeDefined();
-
-        SpriteSheet.map = enemy_ship: { sx: 116, sy: 0, w: 42, h: 43, frames: 1 };
-        e = new Enemy({ 
+    it("Enemy position", function() { 
+       
+      e = new Enemy({ 
           x: 0,   
           y: -50, 
           sprite: 'enemy_ship', 
           health: 10, 
           E: 100 
         });
-        e.board = new GameBoard(); 
-        e.board.remove = function(obj) {};
-    }); 
+      
 
-    it("Enemy position", function() { 
-       dt = 2;
+        dt = 2;
        x = 0;
        y = -50;
-
+    
        expect(e.x).toBe(x);
        expect(e.y).toBe(y);
        e.step(dt); 
@@ -40,26 +31,11 @@ describe("09 - Enemies", function() {
        expect(e.y).toBe(y);
     });
 
-    it("Method enemy step", function() {  
-        spyOn(e.board, 'remove');
-        e.step(0.02); // En el tablero
-        expect(e.board.remove).not.toHaveBeenCalled();
-        e.step(200); // Fuera del tablero
-        expect(e.board.remove).toHaveBeenCalled();
-    });
-
-    it("Method enemy draw", function() {  
-        SpriteSheet = { 
-          draw: function(ctx, sprite, x, y) {}
-        };
-
-        spyOn(SpriteSheet, 'draw');
-        e.draw(ctx);
-        expect(SpriteSheet.draw).toHaveBeenCalled();
-    });
-
+    
+  
+        
+       
 });
-
 
 
 
